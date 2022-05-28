@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:legends_quotes/slider_screen.dart';
 import 'package:legends_quotes/tab_screen.dart';
 
 void main() {
@@ -11,7 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: TabScreen(),
+      home: SliderScreen(),
     );
   }
 }

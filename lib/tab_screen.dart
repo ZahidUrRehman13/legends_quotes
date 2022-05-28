@@ -3,8 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:legends_quotes/TabScreens/categories_screen.dart';
 import 'package:legends_quotes/TabScreens/fire_screen.dart';
-import 'package:legends_quotes/TabScreens/home_screen.dart';
 import 'package:legends_quotes/TabScreens/legends_screen.dart';
+import 'package:legends_quotes/TabScreens/homes_screen.dart';
 
 class TabScreen extends StatefulWidget {
   const TabScreen({Key? key}) : super(key: key);
@@ -18,7 +18,7 @@ class _TabScreenState extends State<TabScreen> {
   int pageIndex = 0;
 
   final Screen = [
-    const LegendScreen(),
+    const LegendsScreen(),
     const HomeScreen(),
     const FireScreen(),
     const CategoriesScreen(),

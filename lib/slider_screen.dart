@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:legends_quotes/Utils/Colors.dart';
+import 'package:legends_quotes/Utils/Constants.dart';
 import 'package:legends_quotes/tab_screen.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -56,13 +58,37 @@ class _SliderScreenState extends State<SliderScreen> {
           Expanded(child: buildPages()),
           buildIndicator(),
           SizedBox(
-            height: 20.0,
+            height: height * 0.05,
           ),
-          MaterialButton(onPressed: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => TabScreen()));
-          },
+          Container(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                MaterialButton(
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => TabScreen()));
+                  },
+                  child: Text(
+                    'Skip',
+                    style: TextStyle(
+                        fontFamily: Constants.fontfamily,
+                        fontSize: 18.0,
+                        fontWeight: FontWeight.bold,
+                    color: AppColors.primaryColor),
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10)
+                  ),
+                  color: Colors.black12,
+                  elevation: 0.0,
+                ),
 
+                SizedBox(
+                  width: width * 0.05,
+                )
+              ],
+            ),
           ),
           SizedBox(
             height: height * 0.1,
@@ -86,7 +112,8 @@ class _SliderScreenState extends State<SliderScreen> {
                 style: TextStyle(
                     color: Colors.black,
                     fontSize: 30.0,
-                    fontWeight: FontWeight.w800),
+                    fontWeight: FontWeight.w800,
+                    fontFamily: Constants.fontfamily),
               ),
               SizedBox(
                 width: 10.0,
@@ -96,7 +123,8 @@ class _SliderScreenState extends State<SliderScreen> {
                 style: TextStyle(
                     color: Colors.blue,
                     fontSize: 30.0,
-                    fontWeight: FontWeight.w800),
+                    fontWeight: FontWeight.w800,
+                    fontFamily: Constants.fontfamily),
               ),
             ],
           ),
@@ -104,22 +132,24 @@ class _SliderScreenState extends State<SliderScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                'Job',
+                ' of Your',
                 style: TextStyle(
                     color: Colors.blue,
                     fontSize: 30.0,
-                    fontWeight: FontWeight.w800),
+                    fontWeight: FontWeight.w800,
+                fontFamily: Constants.fontfamily),
                 textAlign: TextAlign.center,
               ),
               SizedBox(
                 width: 10.0,
               ),
               Text(
-                'Program',
+                'Life!',
                 style: TextStyle(
                     color: Colors.black,
                     fontSize: 30.0,
-                    fontWeight: FontWeight.w800),
+                    fontWeight: FontWeight.w800,
+                    fontFamily: Constants.fontfamily),
               ),
             ],
           ),
@@ -127,31 +157,7 @@ class _SliderScreenState extends State<SliderScreen> {
       ),
     );
   }
-
-  Widget buildActionButtons() {
-    var height = MediaQuery.of(context).size.height;
-    var width = MediaQuery.of(context).size.width;
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        MaterialButton(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(30),
-          ),
-          color: Colors.blue,
-          minWidth: width * 0.8,
-          height: height * 0.06,
-          child: const Text(
-            'Let\'s Go',
-            style: TextStyle(color: Colors.white, fontSize: 20.0),
-          ),
-          onPressed: () {
-            Navigator.pushNamed(context, 'login_screen');
-          },
-        ),
-      ],
-    );
-  }
+  
 
   Widget buildPages() {
     return PageView(
@@ -159,13 +165,13 @@ class _SliderScreenState extends State<SliderScreen> {
       //controller: controller,
       children: [
         onboardPageView(
-          const AssetImage('images/slider_images/recommend.png'),
-          '''Challenge yourself towards your future dream job and get bunch of benefits!''',
+          const AssetImage('assets/billgates.jpg'),
+          '''Challenge yourself towards your future Dream!''',
         ),
-        onboardPageView(const AssetImage('images/slider_images/sheet.png'),
-            'Alert of new Dream jobs Here!'),
-        onboardPageView(const AssetImage('images/slider_images/list.png'),
-            'Keep track of what you need to get'),
+        onboardPageView(const AssetImage('assets/elon_musk_slider_img.jpg'),
+            'Make Life By yourSelf!'),
+        onboardPageView(const AssetImage('assets/jack_ma_slider_img.jpg'),
+            'Your attitude is more important than your capabilities!'),
       ],
     );
   }
@@ -178,9 +184,13 @@ class _SliderScreenState extends State<SliderScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Expanded(
-            child: Image(
-              fit: BoxFit.fitWidth,
-              image: imageProvider,
+            child: ClipRRect(
+              borderRadius: 
+              BorderRadius.circular(10),
+              child: Image(
+                fit: BoxFit.cover,
+                image: imageProvider,
+              ),
             ),
           ),
           const SizedBox(height: 16),
@@ -200,7 +210,7 @@ class _SliderScreenState extends State<SliderScreen> {
       controller: _pageController,
       //controller: controller,
       count: 3,
-      effect: WormEffect(activeDotColor: Color(0xFF003A90)),
+      effect: WormEffect(activeDotColor: Colors.blue),
     );
   }
 }

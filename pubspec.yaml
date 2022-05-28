@@ -49,13 +49,13 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/legend_icon.png
-    - assets/home_screen.jpg
-    - assets/grana_pic.jpg
-    - assets/Elon_musk_fie_screen_image.png
-    - assets/fire_image.jpg
-    - assets/elon_musk.jpg
-    - assets/billgates.jpg
+    - assets/
+#    - assets/home_screen.jpg
+#    - assets/grana_pic.jpg
+#    - assets/Elon_musk_fie_screen_image.png
+#    - assets/fire_image.jpg
+#    - assets/elon_musk.jpg
+#    - assets/billgates.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
