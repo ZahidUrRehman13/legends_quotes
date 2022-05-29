@@ -1,4 +1,6 @@
 
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:pinch_zoom_image_last/pinch_zoom_image_last.dart';
 import 'package:legends_quotes/Utils/Constants.dart';
@@ -11,13 +13,37 @@ class FireScreen extends StatefulWidget {
 }
 
 class _FireScreenState extends State<FireScreen> {
+
+  bool? _imageLoading;
+
+  _startLoading() {
+    setState(() {
+      _imageLoading = true;
+    });
+
+    Timer(const Duration(seconds: 1), () {
+      setState(() {
+        _imageLoading = false;
+      });
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _startLoading();
+  }
   @override
   Widget build(BuildContext context) {
     var _height = MediaQuery.of(context).size.height;
     var _width = MediaQuery.of(context).size.width;
     return Scaffold(
       body: SafeArea(
-        child: Column(
+        child: _imageLoading==true ? Center(
+          child: CircularProgressIndicator(
+            color: Colors.blue,
+          ),
+        ) :Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             SizedBox(height: _height*0.05,),

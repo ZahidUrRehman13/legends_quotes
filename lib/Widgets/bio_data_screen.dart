@@ -1,26 +1,30 @@
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pinch_zoom_image_last/pinch_zoom_image_last.dart';
 import 'package:legends_quotes/Utils/Constants.dart';
 
 class BioDataScreen extends StatefulWidget {
-  const BioDataScreen({Key? key}) : super(key: key);
+  String? imageLink;
+  String? name;
+  String? designation;
+  String? age;
+  String? dateOfBirth;
+  String? description;
+  BioDataScreen({
+    required this.imageLink,
+    required this.name,
+    required this.designation,
+    required this.age,
+    required this.dateOfBirth,
+    required this.description,
+  });
 
   @override
   State<BioDataScreen> createState() => _BioDataScreenState();
 }
 
 class _BioDataScreenState extends State<BioDataScreen> {
-  int age = 60;
-  String born = 'June 28, 1950';
-  String bioData =
-      "Born William Henry III is an American entrepreneur, business mogul, investor, philanthropist, "
-      "and widely known as one of the most richest and influential people in the world. "
-      "William Henry III was born to attorney, William Henry II and teacher,"
-      " Mary Maxwell Gates in Seattle, Washington, USA.";
-  String name = "Bill gates";
+
   @override
   Widget build(BuildContext context) {
     var _height = MediaQuery.of(context).size.height;
@@ -53,7 +57,7 @@ class _BioDataScreenState extends State<BioDataScreen> {
                   margin: EdgeInsets.only(
                       left: _width * 0.05, right: _width * 0.05),
                   child: Image.asset(
-                    'assets/billgates.jpg',
+                   widget.imageLink!,
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -72,16 +76,20 @@ class _BioDataScreenState extends State<BioDataScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Bill Gates',
+                          widget.name!,
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontFamily: Constants.fontfamily,
-                              fontSize: 30),
+                              fontSize: _width*0.05
+                          ),
+                          overflow: TextOverflow.ellipsis,
                         ),
                         Text(
-                          'CEO of MicroSoft',
+                          widget.designation!,
                           style: TextStyle(
-                              fontFamily: Constants.fontfamily, fontSize: 15),
+                              fontFamily: Constants.fontfamily, fontSize: _width*0.04,
+                          ),
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ],
                     ),
@@ -98,16 +106,18 @@ class _BioDataScreenState extends State<BioDataScreen> {
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontFamily: Constants.fontfamily,
-                                    fontSize: 15),
+                                    fontSize: _width*0.04),
+                                overflow: TextOverflow.ellipsis,
                               ),
                               SizedBox(
                                 width: _width * 0.01,
                               ),
                               Text(
-                                '$age',
+                                '${widget.age.toString()}',
                                 style: TextStyle(
                                     fontFamily: Constants.fontfamily,
-                                    fontSize: 15),
+                                    fontSize: _width*0.03),
+                                overflow: TextOverflow.ellipsis,
                               ),
                             ],
                           ),
@@ -120,16 +130,20 @@ class _BioDataScreenState extends State<BioDataScreen> {
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontFamily: Constants.fontfamily,
-                                    fontSize: 15),
+                                    fontSize: _width*0.04),
+                                overflow: TextOverflow.ellipsis,
                               ),
                               SizedBox(
                                 width: _width * 0.01,
                               ),
                               Text(
-                                '$born',
+                                '${widget.dateOfBirth}',
                                 style: TextStyle(
                                     fontFamily: Constants.fontfamily,
-                                    fontSize: 15),
+                                  fontSize: _width*0.03
+                                    ),
+                                overflow: TextOverflow.ellipsis,
+
                               ),
                             ],
                           ),
@@ -144,11 +158,14 @@ class _BioDataScreenState extends State<BioDataScreen> {
               height: _height * 0.08,
             ),
             Padding(
-              padding:  EdgeInsets.only(left: _width*0.05,right: _width*0.05,bottom: _height*0.03),
+              padding: EdgeInsets.only(
+                  left: _width * 0.05,
+                  right: _width * 0.05,
+                  bottom: _height * 0.03),
               child: Text(
-                '$bioData',
+                '${widget.description}',
                 style: TextStyle(
-                  fontSize:20,
+                  fontSize: 20,
                   fontFamily: Constants.fontfamily,
                 ),
                 overflow: TextOverflow.ellipsis,
@@ -156,31 +173,35 @@ class _BioDataScreenState extends State<BioDataScreen> {
               ),
             ),
             GestureDetector(
-              onTap: (){
-
-              },
+              onTap: () {},
               child: Container(
-                height: _height*0.06,
-                width: _width*0.7,
+                height: _height * 0.06,
+                width: _width * 0.7,
                 child: Center(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text('$name Quotes',style: TextStyle(
+                      Text(
+                        '${widget.name} Quotes',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: Constants.fontfamily),
+                      ),
+                      SizedBox(
+                        width: _width * 0.02,
+                      ),
+                      Icon(
+                        Icons.arrow_forward,
                         color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: Constants.fontfamily
-                      ),),
-                      SizedBox(width: _width*0.02,),
-                      Icon(Icons.arrow_forward,color: Colors.white,)
+                      )
                     ],
                   ),
                 ),
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: Colors.black
-                ),
+                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.black),
               ),
             )
           ],

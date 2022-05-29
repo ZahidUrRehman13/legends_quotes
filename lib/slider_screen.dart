@@ -168,9 +168,9 @@ class _SliderScreenState extends State<SliderScreen> {
           const AssetImage('assets/billgates.jpg'),
           '''Challenge yourself towards your future Dream!''',
         ),
-        onboardPageView(const AssetImage('assets/elon_musk_slider_img.jpg'),
+        onboardPageView(const AssetImage('assets/quotes_data/Gold/AlbertEinstein/Albert Einstein Profile.jpg'),
             'Make Life By yourSelf!'),
-        onboardPageView(const AssetImage('assets/jack_ma_slider_img.jpg'),
+        onboardPageView(const AssetImage('assets/quotes_data/Gold/BruceLee/BruceLeeProfile.jpg'),
             'Your attitude is more important than your capabilities!'),
       ],
     );
