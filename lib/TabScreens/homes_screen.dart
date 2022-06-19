@@ -61,8 +61,7 @@ class _HomeScreenState extends State<HomeScreen> {
     'assets/quotes_data/Fresh/WarrenBuffett/WarrenBuffettquotes7.png',
     'assets/quotes_data/Fresh/WarrenBuffett/WarrenBuffettquotes8.jpg',
     'assets/quotes_data/Fresh/WarrenBuffett/WarrenBuffettquotes9.png',
-    'assets/quotes_data/Fresh/WarrenBuffett/WarrenBuffettquotes10.png',
-    'assets/quotes_data/Gold/AlbertEinstein/AlbertEinstein Profile.jpg', //Gold
+    'assets/quotes_data/Fresh/WarrenBuffett/WarrenBuffettquotes10.png',//Gold
     'assets/quotes_data/Gold/AlbertEinstein/AlbertEinsteinQuote1.jpg',
     'assets/quotes_data/Gold/AlbertEinstein/AlbertEinsteinQuote2.jpg',
     'assets/quotes_data/Gold/AlbertEinstein/AlbertEinsteinQuote3.jpg',
@@ -168,9 +167,9 @@ class _HomeScreenState extends State<HomeScreen> {
       body: SafeArea(
           child: _imageLoading==true ? Center(
             child: CircularProgressIndicator(
-              color: Colors.blue,
+              color: Color(0xFFe60000),
             ),
-          ) :ListView.builder(
+          ) :ListView.separated(
             physics: BouncingScrollPhysics(),
               itemCount: listToShow.length,
               itemBuilder: (BuildContext context, index) {
@@ -187,10 +186,12 @@ class _HomeScreenState extends State<HomeScreen> {
                         print('Zoom finished');
                       },
                       image: ClipRRect(
-                        child: Container(
+                          borderRadius: BorderRadius.circular(30),
+                          child: Container(
+                            margin: EdgeInsets.only(left: 10.0,right: 10.0),
                           child: Image.asset(
                             '${listToShow[index]}',
-                            fit: BoxFit.fill,
+                            fit: BoxFit.cover,
                           ),
                         )
                       ),
@@ -242,7 +243,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 //
                 //   ],
                 // );
-              })),
+              }, separatorBuilder: (BuildContext context, int index) {
+            return SizedBox(height:_height*0.05 ,);
+          },)),
     );
   }
 

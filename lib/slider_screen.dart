@@ -1,16 +1,16 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:legends_quotes/Utils/Colors.dart';
 import 'package:legends_quotes/Utils/Constants.dart';
+import 'package:legends_quotes/main.dart';
 import 'package:legends_quotes/tab_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:workmanager/workmanager.dart';
 
 class SliderScreen extends StatefulWidget {
-  static const String id = "slider_screen";
-
-  const SliderScreen({Key? key}) : super(key: key);
-
   @override
   _SliderScreenState createState() => _SliderScreenState();
 }
@@ -23,9 +23,20 @@ class _SliderScreenState extends State<SliderScreen> {
     initialPage: 0,
   );
 
+  int _counterValue = 0;
+  int imageofTheDay=0;
+
   @override
   void initState() {
+    // TODO: implement initState
     super.initState();
+    // _retrieveSavedImageIndex();
+    // Workmanager.registerPeriodicTask(
+    //   TAG,
+    //   "simplePeriodicTask",
+    //   initialDelay: Duration(seconds: 3),
+    // );
+    // loalData();
     _timer = Timer.periodic(Duration(seconds: 2), (Timer timer) {
       if (_currentPage < 2) {
         _currentPage++;
@@ -40,6 +51,18 @@ class _SliderScreenState extends State<SliderScreen> {
       );
     });
   }
+
+  // Future<void> _retrieveSavedImageIndex() async {
+  //   final prefs = await SharedPreferences.getInstance();
+  //   imageofTheDay = prefs.getInt('BackGroundCounterValue') ?? 0;
+  //   log("saved imageIndex fire screen : $imageofTheDay");
+  //
+  // }
+  //
+  // void loalData() async {
+  //   _counterValue = await BackGroundWork.instance._getBackGroundCounterValue();
+  //   setState(() {});
+  // }
 
   @override
   void dispose() {
@@ -75,15 +98,13 @@ class _SliderScreenState extends State<SliderScreen> {
                         fontFamily: Constants.fontfamily,
                         fontSize: 18.0,
                         fontWeight: FontWeight.bold,
-                    color: AppColors.primaryColor),
+                        color: AppColors.primaryColor),
                   ),
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10)
-                  ),
+                      borderRadius: BorderRadius.circular(10)),
                   color: Colors.black12,
                   elevation: 0.0,
                 ),
-
                 SizedBox(
                   width: width * 0.05,
                 )
@@ -121,7 +142,7 @@ class _SliderScreenState extends State<SliderScreen> {
               Text(
                 "Dream",
                 style: TextStyle(
-                    color: Colors.blue,
+                    color: Color(0xFFe60000),
                     fontSize: 30.0,
                     fontWeight: FontWeight.w800,
                     fontFamily: Constants.fontfamily),
@@ -134,10 +155,10 @@ class _SliderScreenState extends State<SliderScreen> {
               Text(
                 ' of Your',
                 style: TextStyle(
-                    color: Colors.blue,
+                    color: Color(0xFFe60000),
                     fontSize: 30.0,
                     fontWeight: FontWeight.w800,
-                fontFamily: Constants.fontfamily),
+                    fontFamily: Constants.fontfamily),
                 textAlign: TextAlign.center,
               ),
               SizedBox(
@@ -157,7 +178,6 @@ class _SliderScreenState extends State<SliderScreen> {
       ),
     );
   }
-  
 
   Widget buildPages() {
     return PageView(
@@ -165,12 +185,16 @@ class _SliderScreenState extends State<SliderScreen> {
       //controller: controller,
       children: [
         onboardPageView(
-          const AssetImage('assets/billgates.jpg'),
+          const AssetImage('assets/quotes_data/Fresh/BillGates/BillGatesProfile_main.jpg'),
           '''Challenge yourself towards your future Dream!''',
         ),
-        onboardPageView(const AssetImage('assets/quotes_data/Gold/AlbertEinstein/Albert Einstein Profile.jpg'),
+        onboardPageView(
+            const AssetImage(
+                'assets/quotes_data/Gold/AlbertEinstein/Albert Einstein Profile.jpg'),
             'Make Life By yourSelf!'),
-        onboardPageView(const AssetImage('assets/quotes_data/Gold/BruceLee/BruceLeeProfile.jpg'),
+        onboardPageView(
+            const AssetImage(
+                'assets/quotes_data/Gold/BruceLee/BruceLeeProfile.jpg'),
             'Your attitude is more important than your capabilities!'),
       ],
     );
@@ -185,8 +209,7 @@ class _SliderScreenState extends State<SliderScreen> {
         children: [
           Expanded(
             child: ClipRRect(
-              borderRadius: 
-              BorderRadius.circular(10),
+              borderRadius: BorderRadius.circular(10),
               child: Image(
                 fit: BoxFit.cover,
                 image: imageProvider,
@@ -210,7 +233,39 @@ class _SliderScreenState extends State<SliderScreen> {
       controller: _pageController,
       //controller: controller,
       count: 3,
-      effect: WormEffect(activeDotColor: Colors.blue),
+      effect: WormEffect(activeDotColor: Color(0xFFe60000)),
     );
   }
 }
+
+// void callbackDispatcher() {
+//   Workmanager.executeTask((task, inputData) async {
+//     print(TAG + "callbackDispatcher");
+//     int value = await BackGroundWork.instance._getBackGroundCounterValue();
+//     BackGroundWork.instance._loadCounterValue(value + 1);
+//
+//     return Future.value(true);
+//   });
+// }
+//
+// class BackGroundWork {
+//   BackGroundWork._privateConstructor();
+//
+//   static final BackGroundWork _instance = BackGroundWork._privateConstructor();
+//
+//   static BackGroundWork get instance => _instance;
+//
+//
+//
+//   _loadCounterValue(int value) async {
+//   SharedPreferences prefs = await SharedPreferences.getInstance();
+//   await prefs.setInt('BackGroundCounterValue', value);
+//   }
+//
+//   Future<int> _getBackGroundCounterValue() async {
+//     SharedPreferences prefs = await SharedPreferences.getInstance();
+//     //Return bool
+//     int counterValue = prefs.getInt('BackGroundCounterValue') ?? 0;
+//     return counterValue;
+//   }
+// }

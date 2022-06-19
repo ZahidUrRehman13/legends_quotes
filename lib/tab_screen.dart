@@ -21,7 +21,7 @@ class _TabScreenState extends State<TabScreen> {
     const LegendsScreen(),
     const HomeScreen(),
     const FireScreen(),
-    const CategoriesScreen(),
+    CategoriesScreen(),
   ];
   @override
   Widget build(BuildContext context) {
@@ -55,12 +55,12 @@ class _TabScreenState extends State<TabScreen> {
                 pageIndex = 0;
               });
             },
-
+            iconSize: 55,
             icon: pageIndex == 0
-                ?  Image.asset('assets/legend_icon.png',
+                ?  Image.asset('assets/legend_new.png',
               color: Color(0xFFcf1020),)
-                : Image.asset('assets/legend_icon.png',
-      color: Colors.black54,fit: BoxFit.cover,)
+                : Image.asset('assets/legend_new.png',
+                 color: Colors.black54,)
           ),
           IconButton(
             enableFeedback: false,

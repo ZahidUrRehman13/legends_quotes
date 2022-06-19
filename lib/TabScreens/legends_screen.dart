@@ -1,7 +1,9 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:legends_quotes/Utils/Constants.dart';
+import 'package:legends_quotes/Utils/notification.dart';
 import 'package:legends_quotes/Widgets/bio_data_screen.dart';
 
 class LegendsScreen extends StatefulWidget {
@@ -12,12 +14,32 @@ class LegendsScreen extends StatefulWidget {
 }
 
 class _LegendsScreenState extends State<LegendsScreen> {
+  int idI =0;
+  final FlutterLocalNotificationsPlugin localNotifications =
+  FlutterLocalNotificationsPlugin();
+  bool fresh = true;
+
+  int _incrementCounter() {
+    return idI;
+  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   Notifications().showNotification(
+  //       localNotifications,
+  //       _incrementCounter(),
+  //       "Legends Quotes",
+  //       "Quotes of the Day",
+  //       "Smart"
+  //   );
+  //
+  // }
   final List<String> imageUrlList = <String>[
-    'assets/billgates.jpg',
+    'assets/quotes_data/Fresh/BillGates/BillGatesProfile_main.jpg',
     'assets/Elon_musk_fie_screen_image.png',
-    'assets/jack_ma_slider_img.jpg',
+    'assets/quotes_data/Fresh/JackMa/JackMaProfile.jpg',
     'assets/jef_bezos.jpg',
-    'assets/warren_buffet.jpg',
+    'assets/quotes_data/Fresh/WarrenBuffett/warrenbuffettprofile.jpg',
   ];
   final List<String> nameList = <String>[
     'BillGates',
@@ -25,6 +47,13 @@ class _LegendsScreenState extends State<LegendsScreen> {
     'JackMa',
     'Jef Bezos',
     'Warren Buffet',
+  ];
+  final List<int> id = <int>[
+    1,
+    2,
+    3,
+    4,
+    5,
   ];
   final List<String> designationList = <String>[
     'CEO of Microsoft',
@@ -102,6 +131,14 @@ class _LegendsScreenState extends State<LegendsScreen> {
     'Muhammad Rumi',
     'Steve Jobs',
   ];
+  final List<int> idOld = <int>[
+    6,
+    7,
+    8,
+    9,
+    10,
+  ];
+
   final List<String> designationListOld = <String>[
     'Co-Founder of Modern Physics',
     'Martial artist',
@@ -184,15 +221,15 @@ class _LegendsScreenState extends State<LegendsScreen> {
             // icon: Icon(Icons.home),
             child: Text('Fresh',
                 style: TextStyle(
-                    color: Colors.black,
+                    color: Color(0xFFe60000),
                     fontWeight: FontWeight.bold,
                     fontFamily: Constants.fontfamily)),
           ),
           Tab(
             // icon: Icon(Icons.settings),
-            child: Text('Cold',
+            child: Text('Gold',
                 style: TextStyle(
-                    color: Colors.black,
+                    color: Color(0xFFe60000),
                     fontWeight: FontWeight.bold,
                     fontFamily: Constants.fontfamily)),
           )
@@ -250,6 +287,8 @@ class _LegendsScreenState extends State<LegendsScreen> {
                                   age: ageList[index],
                                   dateofBirth: dateOfBirthList[index],
                                   description: descriptionList[index],
+                                  id:id[index],
+                                  idOld:0,
                                 ),
                               );
                             })),
@@ -263,7 +302,7 @@ class _LegendsScreenState extends State<LegendsScreen> {
             // This shows the Settings tab content
             CustomScrollView(
               slivers: [
-                showSliverAppBar('Gold'),
+                showSliverAppBar('Gold',),
 
                 // Show other sliver stuff
                 SliverList(
@@ -296,6 +335,8 @@ class _LegendsScreenState extends State<LegendsScreen> {
                                   age: ageListOld[index],
                                   dateofBirth: dateOfBirthListOld[index],
                                   description: descriptionListOld[index],
+                                  id: 0,
+                                  idOld: idOld[index],
                                 ),
                               );
                             })),
@@ -390,6 +431,8 @@ class SelectCard extends StatelessWidget {
     required this.age,
     required this.dateofBirth,
     required this.description,
+    required this.id,
+    required this.idOld,
   }) : super(key: key);
   final String image;
   final String name;
@@ -397,12 +440,14 @@ class SelectCard extends StatelessWidget {
   final String age;
   final String dateofBirth;
   final String description;
+  final int id;
+  final int idOld;
 
   @override
   Widget build(BuildContext context) {
     var _height = MediaQuery.of(context).size.height;
     var _width = MediaQuery.of(context).size.width;
-    final TextStyle? textStyle = Theme.of(context).textTheme.display1;
+    // final TextStyle? textStyle = Theme.of(context).textTheme.display1;
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: GestureDetector(
@@ -411,23 +456,35 @@ class SelectCard extends StatelessWidget {
               context,
               MaterialPageRoute(
                   builder: (context) => BioDataScreen(
-                        imageLink: image,
-                        name: name,
-                        designation: designation,
-                        age: age,
-                        dateOfBirth: dateofBirth,
-                        description: description,
+                        image,
+                        name,
+                        designation,
+                        age,
+                        dateofBirth,
+                        description,
+                        id,
+                        idOld,
                       )));
         },
         child: ClipRRect(
           borderRadius: BorderRadius.circular(30.0),
           child: Container(
             height: _height * 0.4,
-            child: Image.asset(
-              '$image',
-              fit: BoxFit.cover,
+            decoration: BoxDecoration(
+                color: Colors.black12,
+              image: DecorationImage(
+
+                image: AssetImage(
+                  '$image',
+                ),
+                fit: BoxFit.cover
+              )
             ),
-            color: Colors.black12,
+            // child: Image.asset(
+            //   '$image',
+            //   fit: BoxFit.fill,
+            // ),
+            // color: Colors.black12,
           ),
         ),
       ),

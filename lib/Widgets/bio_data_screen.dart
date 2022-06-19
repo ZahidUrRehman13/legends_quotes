@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:legends_quotes/MixScreen/categories_quotes_screen.dart';
+import 'package:legends_quotes/TabScreens/categories_screen.dart';
 import 'package:pinch_zoom_image_last/pinch_zoom_image_last.dart';
 import 'package:legends_quotes/Utils/Constants.dart';
 
@@ -10,14 +12,18 @@ class BioDataScreen extends StatefulWidget {
   String? age;
   String? dateOfBirth;
   String? description;
-  BioDataScreen({
-    required this.imageLink,
-    required this.name,
-    required this.designation,
-    required this.age,
-    required this.dateOfBirth,
-    required this.description,
-  });
+  int? id;
+  int? idOld;
+  BioDataScreen([
+     this.imageLink,
+     this.name,
+     this.designation,
+     this.age,
+     this.dateOfBirth,
+     this.description,
+     this.id,
+    this.idOld,
+  ]);
 
   @override
   State<BioDataScreen> createState() => _BioDataScreenState();
@@ -173,7 +179,12 @@ class _BioDataScreenState extends State<BioDataScreen> {
               ),
             ),
             GestureDetector(
-              onTap: () {},
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>QuotescategoryScreen(
+               id: widget.id!,
+                  idOld: widget.idOld!,
+                )));
+              },
               child: Container(
                 height: _height * 0.06,
                 width: _width * 0.7,
